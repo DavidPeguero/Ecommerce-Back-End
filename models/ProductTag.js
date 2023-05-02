@@ -16,8 +16,14 @@ ProductTag.init(
     product_id : {
       type : DataTypes.INTEGER,
       references: {
-        // This references the `driver` model, which we set in `Driver.js` as its `modelName` property
-        model: 'driver',
+        model: 'product',
+        key: 'id',
+      },
+    },
+    tag_id : {
+      type : DataTypes.INTEGER,
+      references: {
+        model: 'tag',
         key: 'id',
       },
     }

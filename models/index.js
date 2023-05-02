@@ -27,9 +27,13 @@ Category.hasMany(Product, {
   through : 'id'
 })
 // Products belongToMany Tags (through ProductTag)
-
+Product.belongsToMany(Tag, {
+  through : 'id'
+})
 // Tags belongToMany Products (through ProductTag)
-
+Tag.belongsToMany(Product, {
+  through : 'id'
+})
 module.exports = {
   Product,
   Category,
