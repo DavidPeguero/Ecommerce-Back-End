@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
   // be sure to include its associated Category and Tag data
   try {
     const productData = await Product.findAll({
-      include: [Category, Tag],
+      include: [{model: Category}, {model:Tag, through : ProductTag, as : 'product_tags'}],
     });
     res.status(200).json(productData);
   } catch (err) {
@@ -57,6 +57,7 @@ router.post('/', async (req, res) => {
         };
       });
       const productTagIds = await ProductTag.bulkCreate(productTagIdArr);
+      //Add product tags to response
       resBody.productTags = productTagIds;
     }
     res.status(200).json(resBody);
@@ -104,7 +105,7 @@ router.put('/:id', async (req, res) => {
      })
     let updatedProductTags = await ProductTag.bulkCreate(newProductTags)
     // console.log(updatedProductTags)
-    res.status(200).json(productData);
+    res.status(200).json({productData : req.body, destroyedProductTags :destroyedTags, updatedProductTags : updatedProductTags});
   }
   catch (err) {
     // console.log(err);
@@ -112,8 +113,22 @@ router.put('/:id', async (req, res) => {
   };
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete one product by its `id` value
+  try {
+    const deletedProduct = await Product.destroy({
+      where : {
+        id : req.params.id
+      }
+    })
+    if(!deletedProduct){
+      res.status(404).json({response : 404, deletedId : req.params.id });
+      return;
+    }
+    res.status(200).json({response : 200, deletedId : req.params.id })
+  } catch (error) {
+    res.status(500).json(error)
+  }
 });
 
 module.exports = router;
