@@ -71,12 +71,15 @@ router.put('/:id', async (req, res) => {
       },
     })
     if (!tagData[0]) {
-      res.status(400).json({ message: 'Could not update, id does not exist or it is already that value' });
+      res.status(400).json({
+        message: 'Could not update, id does not exist or it is already that value',
+        tagData: tagData
+      });
       return;
     }
-    
-    
-    res.status(200).json({message : "Successfully updated tag", data : tagData});
+
+
+    res.status(200).json({ message: "Successfully updated tag", tagData: tagData });
   } catch (err) {
     res.status(500).json(err)
   }
@@ -91,13 +94,16 @@ router.delete('/:id', async (req, res) => {
       },
     })
     if (!tagData) {
-      res.status(404).json({ message: 'ID does not exist' });
+      res.status(404).json({
+        message: 'ID does not exist',
+        tagData: tagData
+      });
       return;
     }
-    
-    res.status(200).json({message : "Successfully deleted tag"});
+
+    res.status(200).json({ message: "Successfully deleted tag", tagData: tagData });
   } catch (err) {
-    res.status(500).json({message : "Could not delete tag"})
+    res.status(500).json({ message: "Could not delete tag" })
   }
 });
 

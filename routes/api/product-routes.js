@@ -126,10 +126,10 @@ router.delete('/:id', async (req, res) => {
       }
     })
     if(!deletedProduct){
-      res.status(404).json({response : 404, deletedId : req.params.id });
+      res.status(404).json({response : 404, deletedProduct : deletedProduct });
       return;
     }
-    res.status(200).json({response : 200, deletedId : req.params.id })
+    res.status(200).json({response : 200, deletedProduct : deletedProduct })
   } catch (error) {
     res.status(500).json(error)
   }

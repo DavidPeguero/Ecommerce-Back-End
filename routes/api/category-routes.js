@@ -48,10 +48,16 @@ router.put('/:id', async (req, res) => {
       },
     });
     if (!categoryData[0]) {
-      res.status(404).json({ message: 'No category with this id!' });
+      res.status(404).json({
+        message: 'No category with this id!',
+        categoryData: categoryData
+      });
       return;
     }
-    res.status(200).json("Succesfully Updated Category!");
+    res.status(200).json({
+      message: "Succesfully Updated Category!",
+      categoryData: categoryData
+    });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -66,10 +72,16 @@ router.delete('/:id', async (req, res) => {
       },
     });
     if (!categoryData) {
-      res.status(404).json({ message: 'No category with this id!' });
+      res.status(404).json({
+        message: 'No category with this id!',
+        categoryData: categoryData
+      });
       return;
     }
-    res.status(200).json(categoryData);
+    res.status(200).json({
+      message: 'Succesful deleted data',
+      categoryData: categoryData
+    });
   } catch (err) {
     res.status(500).json(err);
   }

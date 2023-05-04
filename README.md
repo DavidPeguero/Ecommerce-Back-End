@@ -2,7 +2,9 @@
   # Ecommer Back-End
   [![](https://img.shields.io/badge/license-MIT-blue)](https://www.mend.io/resources/blog/top-open-source-licenses-explained/#MIT_License)
   ## Description
-  Creates a Server that allows for connecting to the ecommerce_db that can be created with the schema in the 'db' folder and seeded through the 'seeds' folder. This server can listen to get, post, put, and delete request for products, tags, and categories. 
+  Creates a Server that allows for connecting to the ecommerce_db that can be created with the schema in the 'db' folder and seeded through the 'seeds' folder. This server can listen to get, post, put, and delete request for products, tags, and categories.
+  
+  [Video Demonstration](https://drive.google.com/file/d/1opBKHy95WyDFbCXSOiPT8geLgMzy-Fwy/view?usp=sharing) 
   ## Table of Contents
   1. [Installation](#installation)
   2. [Usage](#usage)
