@@ -53,14 +53,52 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   // create a new tag
+  try {
+    let tagData = await Tag.create(req.body)
+
+    res.status(200).json(tagData);
+  } catch (err) {
+    res.status(500).json(err)
+  }
 });
 
 router.put('/:id', async (req, res) => {
   // update a tag's name by its `id` value
+  try {
+    let tagData = await Tag.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    })
+    if (!tagData[0]) {
+      res.status(400).json({ message: 'Could not update, id does not exist or it is already that value' });
+      return;
+    }
+    
+    
+    res.status(200).json({message : "Successfully updated tag", data : tagData});
+  } catch (err) {
+    res.status(500).json(err)
+  }
 });
 
 router.delete('/:id', async (req, res) => {
   // delete on tag by its `id` value
+  try {
+    let tagData = await Tag.destroy({
+      where: {
+        id: req.params.id,
+      },
+    })
+    if (!tagData) {
+      res.status(404).json({ message: 'ID does not exist' });
+      return;
+    }
+    
+    res.status(200).json({message : "Successfully deleted tag"});
+  } catch (err) {
+    res.status(500).json({message : "Could not delete tag"})
+  }
 });
 
 module.exports = router;
